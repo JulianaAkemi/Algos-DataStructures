@@ -1,4 +1,4 @@
-var countGoodSubstrings = function (s) {
+const countGoodSubstrings = (s) => {
   if (s.length < 3) return 0;
 
   let goodSubstrings = 0;

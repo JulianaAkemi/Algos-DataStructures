@@ -1,10 +1,8 @@
 var numIdenticalPairs = function (nums) {
-  if (nums.length > 100) {
-    return;
-  }
+  if (nums.length > 100) return;
 
-  let frequencyCounter = {};
-  let goodPairs = 0;
+  let frequencyCounter = {},
+    goodPairs = 0;
 
   nums.forEach((num) => {
     num in frequencyCounter
