@@ -29,18 +29,20 @@ class BinarySearchTree {
           current.left = newNode;
           return this;
         }
+
         current = current.left;
       } else {
         if (current.right === null) {
           current.right = newNode;
           return this;
         }
+
         current = current.right;
       }
     }
   }
 
-  find(value) {
+  find(value) { //Breadth First
     if (this.root === null) return false;
     let current = this.root,
       found = false;
@@ -55,30 +57,38 @@ class BinarySearchTree {
       }
     }
 
-    if (!found) return undefined;
+    if (!found) return false;
     return current;
   }
 
-  contains(value) {
-    if (this.root === null) return false;
-    let current = this.root,
-      found = false;
+  find2(node, value) { //Breadth First
+    if (node === null) return false;
+    let queue = [node];
 
-    while (current && !found) {
-      if (value < current.value) {
-        current = current.left;
-      } else if (value > current.value) {
-        current = current.right;
-      } else {
-        return true;
-      }
+    while (queue.length) {
+      const current = queue.shift();
+
+			if(current.val === value) return true;
+			if(current.left) queue.push(current.left);
+			if(current.right) queue.push(current.right);
     }
 
-    return false;
+		return false;
   }
 
-  BFS() {
+  findRecursively(node, value) { //Breadth First
+    if (node === null) return false;
+    if (node.val === target) return true;
+
+		return findRecursively(node.left, value) || findRecursively(node.right, value);
+  }
+
+  //Since Breadth First uses a queue, it can't be implemented
+  //recursively since under the hood it would be using a stack call
+  BreadthFirstSearch() {
     let node = this.root;
+    if (node === null) return [];
+
     const data = [],
       queue = [];
 
@@ -95,10 +105,13 @@ class BinarySearchTree {
     return data;
   }
 
+  //Depth First Search uses stack
   DFSPreOrder() {
     const data = [];
 
     const traverse = (node) => {
+      if (node === null) return [];
+
       data.push(node.value);
       if (node.left) traverse(node.left);
       if (node.right) traverse(node.right);
@@ -112,6 +125,8 @@ class BinarySearchTree {
     const data = [];
 
     const traverse = (node) => {
+      if (node === null) return [];
+
       if (node.left) traverse(node.left);
       if (node.right) traverse(node.right);
       data.push(node.value);
@@ -121,10 +136,21 @@ class BinarySearchTree {
     return data;
   }
 
+  DFSPostOrder2(node) {
+    //under the hood call stack
+    if (node === null) return [];
+
+    const leftValues = this.DFSPostOrder2(node.left);
+    const rightValues = this.DFSPostOrder2(node.right);
+    return [node.val, ...leftValues, ...rightValues];
+  }
+
   DFSInOrder() {
     const data = [];
 
     const traverse = (node) => {
+      if (node === null) return [];
+
       if (node.left) traverse(node.left);
       data.push(node.value);
       if (node.right) traverse(node.right);
