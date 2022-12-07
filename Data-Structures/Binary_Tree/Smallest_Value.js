@@ -2,7 +2,7 @@
 // 		/	  \
 // 	 11    3
 // 	/  \    \
-// 4    15    12
+// 4    15   12
 
 // null node = 0
 
@@ -34,7 +34,7 @@ const findSmallestValue2 = (node) => {
   let smallest = Infinity;
 
   while (queue.length) {
-    let current = queue.shift(); //makes it O(n^2)
+    let current = queue.shift(); //makes it O(n^2), with a proper queue it's O(n)
 
     if (current.val < smallest) smallest = current.val;
 
