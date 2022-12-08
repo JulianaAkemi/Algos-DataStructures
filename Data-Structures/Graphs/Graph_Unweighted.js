@@ -34,9 +34,9 @@ class Graph {
   //------------TRAVERSING--------------
 
   depthFirstRecursive(start) {
-    const result = [];
-    const visited = {};
-    const adjacencyList = this.adjacencyList;
+    const result = [],
+      visited = {},
+      adjacencyList = this.adjacencyList;
 
     (function dfs(vertex) {
       if (!vertex) return null;
@@ -55,9 +55,9 @@ class Graph {
   }
 
   depthFirstIterative(start) {
-    const stack = [start];
-    const result = [];
-    const visited = {};
+    const stack = [start],
+      result = [],
+      visited = {};
     let currentVertex;
 
     visited[start] = true;
@@ -73,13 +73,14 @@ class Graph {
         }
       });
     }
+
     return result;
   }
 
   breadthFirst(start) {
-    const queue = [start];
-    const result = [];
-    const visited = {};
+    const queue = [start],
+      result = [],
+      visited = {};
     let currentVertex;
     visited[start] = true;
 
@@ -94,6 +95,7 @@ class Graph {
         }
       });
     }
+
     return result;
   }
 }

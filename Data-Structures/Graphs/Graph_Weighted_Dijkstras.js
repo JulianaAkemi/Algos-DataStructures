@@ -21,9 +21,11 @@ class PriorityQueue {
     const element = this.values[idx];
 
     while (idx > 0) {
-      let parentIdx = Math.floor((idx - 1) / 2);
-      let parent = this.values[parentIdx];
+      let parentIdx = Math.floor((idx - 1) / 2),
+        parent = this.values[parentIdx];
+
       if (element.priority >= parent.priority) break;
+
       this.values[parentIdx] = element;
       this.values[idx] = parent;
       idx = parentIdx;
@@ -31,8 +33,8 @@ class PriorityQueue {
   }
 
   dequeue() {
-    const min = this.values[0];
-    const end = this.values.pop();
+    const min = this.values[0],
+      end = this.values.pop();
 
     if (this.values.length > 0) {
       this.values[0] = end;
@@ -44,17 +46,19 @@ class PriorityQueue {
 
   sinkDown() {
     let idx = 0;
-    const length = this.values.length;
-    const element = this.values[0];
+    const length = this.values.length,
+      element = this.values[0];
 
     while (true) {
-      let leftChildIdx = 2 * idx + 1;
-      let rightChildIdx = 2 * idx + 2;
-      let leftChild, rightChild;
-      let swap = null;
+      let leftChildIdx = 2 * idx + 1,
+        rightChildIdx = 2 * idx + 2,
+        leftChild,
+        rightChild,
+        swap = null;
 
       if (leftChildIdx < length) {
         leftChild = this.values[leftChildIdx];
+
         if (leftChild.priority < element.priority) {
           swap = leftChildIdx;
         }
@@ -62,6 +66,7 @@ class PriorityQueue {
 
       if (rightChildIdx < length) {
         rightChild = this.values[rightChildIdx];
+
         if (
           (swap === null && rightChild.priority < element.priority) ||
           (swap !== null && rightChild.priority < leftChild.priority)
@@ -93,11 +98,11 @@ class WeightedGraph {
   }
 
   Dijkstra(start, finish) {
-    const nodes = new PriorityQueue();
-    const distances = {};
-    const previous = {};
-    let path = []; //to return at end
-    let smallest;
+    const nodes = new PriorityQueue(),
+    	distances = {},
+    	previous = {};
+    let path = [], //to return at end
+    	smallest;
 
     //build up initial state
     for (let vertex in this.adjacencyList) {
@@ -128,10 +133,10 @@ class WeightedGraph {
       if (smallest || distances[smallest] !== Infinity) {
         for (let neighbor in this.adjacencyList[smallest]) {
           //find neighboring node
-          let nextNode = this.adjacencyList[smallest][neighbor];
+          let nextNode = this.adjacencyList[smallest][neighbor],
           //calculate new distance to neighboring node
-          let candidate = distances[smallest] + nextNode.weight;
-          let nextNeighbor = nextNode.node;
+          	candidate = distances[smallest] + nextNode.weight,
+          	nextNeighbor = nextNode.node;
 
           if (candidate < distances[nextNeighbor]) {
             //updating new smallest distance to neighbor
