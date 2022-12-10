@@ -1,6 +1,6 @@
 class Node {
   constructor(value) {
-    this.value = value;
+    this.val = value;
     this.left = null;
     this.right = null;
   }
@@ -22,9 +22,9 @@ class BinarySearchTree {
     let current = this.root;
 
     while (true) {
-      if (value === current.value) return undefined;
+      if (value === current.val) return undefined;
 
-      if (value < current.value) {
+      if (value < current.val) {
         if (current.left === null) {
           current.left = newNode;
           return this;
@@ -48,9 +48,9 @@ class BinarySearchTree {
       found = false;
 
     while (current && !found) {
-      if (value < current.value) {
+      if (value < current.val) {
         current = current.left;
-      } else if (value > current.value) {
+      } else if (value > current.val) {
         current = current.right;
       } else {
         found = true;
@@ -96,7 +96,7 @@ class BinarySearchTree {
 
     while (queue.length) {
       node = queue.shift();
-      data.push(node.value);
+      data.push(node.val);
 
       if (node.left) queue.push(node.left);
       if (node.right) queue.push(node.right);
@@ -112,7 +112,7 @@ class BinarySearchTree {
     const traverse = (node) => {
       if (node === null) return [];
 
-      data.push(node.value);
+      data.push(node.val);
       if (node.left) traverse(node.left);
       if (node.right) traverse(node.right);
     };
@@ -129,7 +129,7 @@ class BinarySearchTree {
 
       if (node.left) traverse(node.left);
       if (node.right) traverse(node.right);
-      data.push(node.value);
+      data.push(node.val);
     };
 
     traverse(this.root);
@@ -152,13 +152,31 @@ class BinarySearchTree {
       if (node === null) return [];
 
       if (node.left) traverse(node.left);
-      data.push(node.value);
+      data.push(node.val);
       if (node.right) traverse(node.right);
     };
 
     traverse(this.root);
     return data;
   }
+
+	iterativeDFSInOrder(node) {
+		const stack = [];
+		const result = [];
+
+		while (node || stack.length) {
+			if (node) {
+				stack.push(node);
+				node = node.left;
+			} else {
+				node = stack.pop();
+				result.push(node.val);
+				node = node.right;
+			}
+		}
+
+		return result;
+	}
 
   invert(node) {
     let left = node.left;
