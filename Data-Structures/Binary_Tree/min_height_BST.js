@@ -36,7 +36,7 @@ const buildBST = (arr) => {
 	return minHeightBST(arr, null, 0, arr.length - 1);
 }
 
-
+//merge sort
 //Time: O(n)
 //Space: O(n)
 const minHeightBST2 = (arr, start, end) => {
