@@ -15,22 +15,22 @@ const graph = {
 };
 
 //Depth first
-const hasPath = (graph, src, dst) => {
-  if (src === dst) return true;
+const hasPath = (graph, source, destination) => {
+  if (source === destination) return true;
 
-  for (let neighbor of graph[src]) {
-    if (hasPath(graph, neighbor, dst) === true) return true;
+  for (let neighbor of graph[source]) {
+    if (hasPath(graph, neighbor, destination) === true) return true;
   }
 };
 
 //Breadth first
-const hasPath2 = (graph, src, dst) => {
-  const queue = [src];
+const hasPath2 = (graph, source, destination) => {
+  const queue = [source];
 
   while (queue.length > 0) {
     const current = queue.shift();
 
-    if (current === dst) return true;
+    if (current === destination) return true;
 
     for (let neighbor of graph[current]) queue.push(neighbor);
   }
